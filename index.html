@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #111;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1001;
+        }
+
+        /* Container for the grid */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-width: 800px;
+            background-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Individual grid boxes */
+        .box {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .box1 {
+            background: linear-gradient(135deg, #87cefa, #1e90ff);
+        }
+
+        .box2 {
+            background: linear-gradient(135deg, #db7093, #c71585);
+        }
+
+        .box3 {
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+        }
+
+        .box4 {
+            background: linear-gradient(135deg, #4682b4, #4169e1);
+        }
+
+        .box5 {
+            background: linear-gradient(135deg, #f08080, #cd5c5c);
+        }
+
+        .box6 {
+            background: linear-gradient(135deg, #6a5acd, #483d8b);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Menu button -->
+    <button class="openbtn" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="#">Settings</a>
+        <a href="#">Notifications</a>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+        <div class="box box1">Box 1</div>
+        <div class="box box2">Box 2</div>
+        <div class="box box3">Box 3</div>
+        <div class="box box4">Box 4</div>
+        <div class="box box5">Box 5</div>
+        <div class="box box6">Box 6</div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.right === "-250px") {
+                sidebar.style.right = "0";
+            } else {
+                sidebar.style.right = "-250px";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
