@@ -15,41 +15,35 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 220px;
+            width: 200px;
             height: 60px;
-            background-color: #222;
+            background-color: #111;
             position: fixed;
             top: 15px;
-            right: -240px;
+            right: -220px;
             transition: 0.3s;
             padding: 10px;
             border-radius: 10px;
             z-index: 1000;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
         }
 
         .sidebar a {
             text-decoration: none;
-            font-size: 22px;
+            font-size: 18px;
             color: white;
             display: block;
-            transition: color 0.3s;
-        }
-
-        .sidebar a:hover {
-            color: #1e90ff;
+            transition: 0.3s;
         }
 
         .openbtn {
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             background-color: #333;
             color: white;
@@ -60,7 +54,6 @@
             top: 10px;
             right: 10px;
             z-index: 1001;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
         }
 
         /* Main container mimicking the black box in your image */
@@ -128,8 +121,8 @@
 
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
-        <a href="#" title="Settings">⚙</a>
-        <a href="#" title="Notifications">🔔</a>
+        <a href="#">⚙</a>
+        <a href="#">🔔</a>
     </div>
 
     <!-- Main container -->
@@ -145,10 +138,10 @@
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
-            if (sidebar.style.right === "-240px") {
-                sidebar.style.right = "10px";
+            if (sidebar.style.right === "-220px") {
+                sidebar.style.right = "50px"; // Adjust the sidebar so it doesn't overlap the button
             } else {
-                sidebar.style.right = "-240px";
+                sidebar.style.right = "-220px";
             }
         }
     </script>
