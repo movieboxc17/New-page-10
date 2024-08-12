@@ -1,146 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Bandwidth Stress Test</title>
+    <title>Settings Page</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
-            background-color: #282c34;
-            color: #61dafb;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2rem;
-            color: #ffffff;
-        }
-
-        .buttons {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
             display: flex;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        #startButton {
-            background-color: #61dafb;
-            color: #282c34;
-        }
-
-        #startButton:hover {
-            background-color: #21a1f1;
-        }
-
-        #stopButton {
-            background-color: #e06c75;
-            color: #ffffff;
-        }
-
-        #stopButton:hover {
-            background-color: #c74b58;
-        }
-
-        #status {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 1.2rem;
-            background-color: #20232a;
+        .settings-container {
+            background-color: #333;
+            border-radius: 20px;
             padding: 20px;
+            width: 320px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .back-arrow {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .back-arrow svg {
+            width: 30px;
+            height: 30px;
+            fill: #00f;
+            cursor: pointer;
+        }
+
+        .slider-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            background-color: #444;
             border-radius: 10px;
-            width: 300px;
+            padding: 10px;
         }
 
-        #statusText {
-            font-weight: bold;
-            color: #98c379;
+        .slider-container .label {
+            font-size: 18px;
+            color: #00f;
+            flex: 1;
+            text-align: left;
         }
 
-        #filesDownloaded, #dataDownloaded {
-            color: #61dafb;
-            font-weight: bold;
+        .slider-container input[type="range"] {
+            flex: 2;
+            margin: 0 10px;
+        }
+
+        .slider-container output {
+            width: 50px;
+            color: #00f;
+            background-color: #000;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .spacer {
+            height: 15px;
+            background-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
         }
     </style>
 </head>
+
 <body>
 
-    <h1>Network Bandwidth Stress Test</h1>
-    <div class="buttons">
-        <button id="startButton">Start Test</button>
-        <button id="stopButton" disabled>Stop Test</button>
-    </div>
+    <div class="settings-container">
+        <!-- Back Arrow -->
+        <div class="back-arrow" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M5.854 4.646a.5.5 0 0 0-.708.708L7.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3z" />
+            </svg>
+        </div>
 
-    <div id="status">
-        <p>Status: <span id="statusText">Idle</span></p>
-        <p>Files Downloaded: <span id="filesDownloaded">0</span></p>
-        <p>Total Data Downloaded: <span id="dataDownloaded">0</span> MB</p>
+        <!-- Sound Slider -->
+        <div class="slider-container">
+            <span class="label">Sound</span>
+            <input type="range" id="soundSlider" min="0" max="100" value="0" oninput="updateOutput('soundOutput', this.value)">
+            <output id="soundOutput">0%</output>
+        </div>
+
+        <!-- Brightness Slider -->
+        <div class="slider-container">
+            <span class="label">Brightness</span>
+            <input type="range" id="brightnessSlider" min="0" max="100" value="0" oninput="updateOutput('brightnessOutput', this.value)">
+            <output id="brightnessOutput">0%</output>
+        </div>
+
+        <!-- Spacers -->
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Copyright Teknik AB all rights reserved.</p>
+            <p>V 1.2 beta</p>
+        </div>
     </div>
 
     <script>
-        let running = false;
-        let dataDownloaded = 0;
-        let filesDownloaded = 0;
-        let intervalId;
-
-        function downloadLargeFile() {
-            let url = 'https://speed.hetzner.de/100MB.bin'; // 100 MB file example
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.blob();
-                })
-                .then(blob => {
-                    filesDownloaded += 1;
-                    dataDownloaded += blob.size / (1024 * 1024); // Convert bytes to megabytes
-                    document.getElementById('filesDownloaded').innerText = filesDownloaded;
-                    document.getElementById('dataDownloaded').innerText = dataDownloaded.toFixed(2);
-                })
-                .catch(error => {
-                    console.error('Download error:', error);
-                });
+        function updateOutput(outputId, value) {
+            document.getElementById(outputId).textContent = value + '%';
         }
 
-        document.getElementById('startButton').onclick = function() {
-            if (running) return;
-            running = true;
-            dataDownloaded = 0;
-            filesDownloaded = 0;
-            document.getElementById('filesDownloaded').innerText = filesDownloaded;
-            document.getElementById('dataDownloaded').innerText = dataDownloaded.toFixed(2);
-            document.getElementById('statusText').innerText = 'Running';
-            document.getElementById('startButton').disabled = true;
-            document.getElementById('stopButton').disabled = false;
-
-            intervalId = setInterval(downloadLargeFile, 1000); // Download every second
-        };
-
-        document.getElementById('stopButton').onclick = function() {
-            if (!running) return;
-            running = false;
-            clearInterval(intervalId);
-            document.getElementById('statusText').innerText = 'Stopped';
-            document.getElementById('startButton').disabled = false;
-            document.getElementById('stopButton').disabled = true;
-        };
+        function goBack() {
+            window.history.back(); // Takes the user back to the previous page
+        }
     </script>
 
 </body>
+
 </html>
