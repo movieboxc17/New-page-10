@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings Page</title>
+    <title>Cool Webpage</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #000;
+            background-color: #000; /* Set entire background to black */
             color: white;
             display: flex;
             justify-content: center;
@@ -17,119 +17,132 @@
             height: 100vh;
         }
 
-        .settings-container {
+        /* Sidebar */
+        .sidebar {
+            width: 120px;
+            height: 50px;
             background-color: #111;
-            border-radius: 15px;
-            padding: 20px;
-            width: 300px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .back-arrow {
-            font-size: 24px;
-            color: #00f;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .back-arrow:hover {
-            text-decoration: underline;
-        }
-
-        .back-arrow svg {
-            margin-right: 8px;
-        }
-
-        .slider-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .slider-container .label {
-            flex: 1;
-            font-size: 18px;
-            color: #00f;
-        }
-
-        .slider-container input[type="range"] {
-            width: 100%;
-            margin-left: 10px;
-            accent-color: #00f;
-        }
-
-        .slider-container output {
-            width: 40px;
-            text-align: center;
-            color: #00f;
-            background-color: #333;
-            border-radius: 5px;
+            position: fixed;
+            top: 15px;
+            right: -150px;
+            transition: 0.3s;
             padding: 5px;
-        }
-
-        .spacer {
-            height: 40px;
-            background-color: #333;
             border-radius: 10px;
-            margin-bottom: 10px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Center the icons horizontally */
+            align-items: center;
         }
 
-        .footer {
+        .sidebar a {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            margin: 0 8px; /* Reduce the gap between icons */
+            transition: 0.3s;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1001;
+        }
+
+        /* Main container mimicking the black box in your image */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            background-color: #000;
+            border-radius: 10px;
+            width: 500px;
+            height: 500px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        /* Individual grid boxes */
+        .box {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border-radius: 10px;
             text-align: center;
-            color: gray;
-            font-size: 14px;
-            margin-top: 20px;
+            font-size: 1.2em;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .box1 {
+            background: linear-gradient(135deg, #87cefa, #1e90ff);
+        }
+
+        .box2 {
+            background: linear-gradient(135deg, #db7093, #c71585);
+        }
+
+        .box3 {
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+        }
+
+        .box4 {
+            background: linear-gradient(135deg, #4682b4, #4169e1);
+        }
+
+        .box5 {
+            background: linear-gradient(135deg, #f08080, #cd5c5c);
+        }
+
+        .box6 {
+            background: linear-gradient(135deg, #6a5acd, #483d8b);
         }
     </style>
 </head>
 
 <body>
 
-    <div class="settings-container">
-        <!-- Back Arrow -->
-        <a href="#" class="back-arrow" onclick="goBack()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M5.854 4.646a.5.5 0 0 0-.708.708L7.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3z" />
-            </svg>
-            Back
-        </a>
+    <!-- Menu button -->
+    <button class="openbtn" onclick="toggleSidebar()">☰</button>
 
-        <!-- Sound Slider -->
-        <div class="slider-container">
-            <span class="label">Sound</span>
-            <input type="range" id="soundSlider" min="0" max="100" value="0" oninput="updateOutput('soundOutput', this.value)">
-            <output id="soundOutput">0%</output>
-        </div>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="#">⚙</a>
+        <a href="#">🔔</a>
+    </div>
 
-        <!-- Brightness Slider -->
-        <div class="slider-container">
-            <span class="label">Brightness</span>
-            <input type="range" id="brightnessSlider" min="0" max="100" value="0" oninput="updateOutput('brightnessOutput', this.value)">
-            <output id="brightnessOutput">0%</output>
-        </div>
-
-        <!-- Spacers -->
-        <div class="spacer"></div>
-        <div class="spacer"></div>
-        <div class="spacer"></div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Copyright Teknik AB all rights reserved.</p>
-            <p>V 1.2 beta</p>
-        </div>
+    <!-- Main container -->
+    <div class="container">
+        <div class="box box1">Box 1</div>
+        <div class="box box2">Box 2</div>
+        <div class="box box3">Box 3</div>
+        <div class="box box4">Box 4</div>
+        <div class="box box5">Box 5</div>
+        <div class="box box6">Box 6</div>
     </div>
 
     <script>
-        function updateOutput(outputId, value) {
-            document.getElementById(outputId).textContent = value + '%';
-        }
-
-        function goBack() {
-            window.history.back(); // This will take you back to the previous page
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.right === "-150px") {
+                sidebar.style.right = "20px"; // Move sidebar further to the side
+            } else {
+                sidebar.style.right = "-150px";
+            }
         }
     </script>
 
