@@ -9,7 +9,8 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #000; /* Set entire background to black */
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,28 +19,27 @@
 
         /* Sidebar */
         .sidebar {
-            width: 250px;
-            height: 100vh;
+            width: 200px;
+            height: 60px;
             background-color: #111;
             position: fixed;
-            top: 0;
-            right: -250px;
+            top: 15px;
+            right: -220px;
             transition: 0.3s;
-            padding-top: 60px;
+            padding: 10px;
+            border-radius: 10px;
             z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
 
         .sidebar a {
-            padding: 10px 15px;
             text-decoration: none;
             font-size: 18px;
             color: white;
             display: block;
             transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #575757;
         }
 
         .openbtn {
@@ -49,34 +49,39 @@
             color: white;
             padding: 10px 15px;
             border: none;
-            position: fixed;
-            top: 15px;
-            right: 15px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             z-index: 1001;
         }
 
-        /* Container for the grid */
+        /* Main container mimicking the black box in your image */
         .container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 20px;
-            max-width: 800px;
             background-color: #000;
             border-radius: 10px;
+            width: 500px;
+            height: 500px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         /* Individual grid boxes */
         .box {
             background: linear-gradient(135deg, #ff69b4, #ff1493);
-            padding: 20px;
             border-radius: 10px;
             text-align: center;
             font-size: 1.2em;
             color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .box:hover {
@@ -116,8 +121,8 @@
 
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
-        <a href="#">Settings</a>
-        <a href="#">Notifications</a>
+        <a href="#">⚙</a>
+        <a href="#">🔔</a>
     </div>
 
     <!-- Main container -->
@@ -133,10 +138,10 @@
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
-            if (sidebar.style.right === "-250px") {
-                sidebar.style.right = "0";
+            if (sidebar.style.right === "-220px") {
+                sidebar.style.right = "10px";
             } else {
-                sidebar.style.right = "-250px";
+                sidebar.style.right = "-220px";
             }
         }
     </script>
