@@ -10,7 +10,6 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #000;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,68 +17,87 @@
         }
 
         .settings-container {
-            background-color: #333;
+            background-color: #666;
             border-radius: 20px;
             padding: 20px;
-            width: 320px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             text-align: center;
+            position: relative;
         }
 
         .back-arrow {
-            display: inline-block;
-            text-align: left;
-            margin-bottom: 20px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
         }
 
         .back-arrow svg {
             width: 30px;
             height: 30px;
             fill: #00f;
-            cursor: pointer;
         }
 
         .slider-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            background-color: #444;
+            justify-content: space-between;
+            background-color: #333;
             border-radius: 10px;
             padding: 10px;
+            margin-bottom: 20px;
         }
 
         .slider-container .label {
             font-size: 18px;
             color: #00f;
-            flex: 1;
+            flex-grow: 1;
             text-align: left;
         }
 
         .slider-container input[type="range"] {
-            flex: 2;
+            flex-grow: 2;
             margin: 0 10px;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background-color: #666;
+            height: 8px;
+            border-radius: 5px;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #00f;
+            border-radius: 50%;
+            cursor: pointer;
         }
 
         .slider-container output {
             width: 50px;
+            text-align: center;
             color: #00f;
             background-color: #000;
             border-radius: 5px;
             padding: 5px;
-            text-align: center;
         }
 
         .spacer {
-            height: 15px;
-            background-color: transparent;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 10px;
             margin-bottom: 10px;
         }
 
         .footer {
-            margin-top: 20px;
-            font-size: 14px;
+            text-align: center;
             color: gray;
+            font-size: 12px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -110,6 +128,7 @@
         </div>
 
         <!-- Spacers -->
+        <div class="spacer"></div>
         <div class="spacer"></div>
         <div class="spacer"></div>
 
