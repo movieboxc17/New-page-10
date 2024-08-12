@@ -19,18 +19,18 @@
 
         /* Sidebar */
         .sidebar {
-            width: 200px;
-            height: 60px;
+            width: 120px;
+            height: 50px;
             background-color: #111;
             position: fixed;
             top: 15px;
-            right: -220px;
+            right: -150px;
             transition: 0.3s;
-            padding: 10px;
+            padding: 5px;
             border-radius: 10px;
             z-index: 1000;
             display: flex;
-            justify-content: space-around;
+            justify-content: center; /* Center the icons horizontally */
             align-items: center;
         }
 
@@ -38,7 +38,7 @@
             text-decoration: none;
             font-size: 18px;
             color: white;
-            display: block;
+            margin: 0 8px; /* Reduce the gap between icons */
             transition: 0.3s;
         }
 
@@ -138,10 +138,10 @@
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
-            if (sidebar.style.right === "-220px") {
-                sidebar.style.right = "50px"; // Adjust the sidebar so it doesn't overlap the button
+            if (sidebar.style.right === "-150px") {
+                sidebar.style.right = "20px"; // Move sidebar further to the side
             } else {
-                sidebar.style.right = "-220px";
+                sidebar.style.right = "-150px";
             }
         }
     </script>
