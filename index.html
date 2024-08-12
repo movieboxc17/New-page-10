@@ -15,35 +15,41 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 200px;
+            width: 220px;
             height: 60px;
-            background-color: #111;
+            background-color: #222;
             position: fixed;
             top: 15px;
-            right: -220px;
+            right: -240px;
             transition: 0.3s;
             padding: 10px;
             border-radius: 10px;
             z-index: 1000;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
         }
 
         .sidebar a {
             text-decoration: none;
-            font-size: 18px;
+            font-size: 22px;
             color: white;
             display: block;
-            transition: 0.3s;
+            transition: color 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #1e90ff;
         }
 
         .openbtn {
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
             background-color: #333;
             color: white;
@@ -54,6 +60,7 @@
             top: 10px;
             right: 10px;
             z-index: 1001;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
         }
 
         /* Main container mimicking the black box in your image */
@@ -121,8 +128,8 @@
 
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
-        <a href="#">⚙</a>
-        <a href="#">🔔</a>
+        <a href="#" title="Settings">⚙</a>
+        <a href="#" title="Notifications">🔔</a>
     </div>
 
     <!-- Main container -->
@@ -138,10 +145,10 @@
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
-            if (sidebar.style.right === "-220px") {
+            if (sidebar.style.right === "-240px") {
                 sidebar.style.right = "10px";
             } else {
-                sidebar.style.right = "-220px";
+                sidebar.style.right = "-240px";
             }
         }
     </script>
